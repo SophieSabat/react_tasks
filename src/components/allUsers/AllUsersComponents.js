@@ -1,35 +1,44 @@
 import React, {Component} from 'react';
-import {UsersService} from "../../services/UsersService";
-import UserComponents from "../user/UserComponents";
+import UsersService from "../../services/UsersService";
+import UserComponent from "../user/UserComponent";
+import './AllUsers.css';
+import FullUsersComponent from "../fullUsers/FullUsersComponent";
+
+import {Route, Switch, withRouter} from "react-router-dom";
+
 
 class AllUsersComponents extends Component {
 
     userService = new UsersService();
-    state = {users: [], chosenOne: null}
+    state = {users: []};
 
-    componentDidMount() {
-        this.userService.getAllUsers().then(value => this.setState({users: value}))
+    async componentDidMount() {
+        let users = await this.userService.getAllUsers();
+        this.setState({users});
     }
-    onSelectUser = (id) => {
-        this.userService.getUserById(id).then(value => this.setState({chosenOne: value}))
-    }
-
 
     render() {
 
-        let {users, chosenOne} = this.state;
+        let {users} = this.state;
+        let {match: {url}} = this.props;
 
         return (
             <div>
                 {
-                    users.map(user => <UserComponents item={user} key={user.id} onSelectUseer={this.onSelectUser}/>)
+                    users.map(user => <UserComponent item={user} key={user.id}/>)
                 }
-                {
-                    chosenOne && <h4>{chosenOne.id} - {chosenOne.name} - {chosenOne.email}</h4>
-                }
+
+                <div className={'all-users-router'}>
+                    <Switch>
+                        <Route path={`${url}/:id`} exact={true} render={(props) => {
+                            return <FullUsersComponent {...props}/>
+                        }}/>
+                    </Switch>
+                </div>
+
             </div>
         );
     }
 }
 
-export default AllUsersComponents;
+export default withRouter(AllUsersComponents);
