@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import UsersService from "../../services/UsersService";
 import UserComponent from "../user/UserComponent";
-import './AllUsers.css';
-import FullUsersComponent from "../fullUsers/FullUsersComponent";
+import FullUsersComponent from "../full-user/FullUsersComponent";
 
 import {Route, Switch, withRouter} from "react-router-dom";
 
 
-class AllUsersComponents extends Component {
+
+class AllUsersComponent extends Component {
 
     userService = new UsersService();
     state = {users: []};
@@ -17,28 +17,28 @@ class AllUsersComponents extends Component {
         this.setState({users});
     }
 
+
     render() {
 
-        let {users} = this.state;
-        let {match: {url}} = this.props;
+        const {users} = this.state;
+        const {match: {url}} = this.props;
 
         return (
             <div>
                 {
                     users.map(user => <UserComponent item={user} key={user.id}/>)
                 }
-
-                <div className={'all-users-router'}>
+                <div>
                     <Switch>
-                        <Route path={`${url}/:id`} exact={true} render={(props) => {
-                            return <FullUsersComponent {...props}/>
+                        <Route path={url + '/:id'} render={(props) => {
+                            const {match: {params: {id}}} = props;
+                            return <FullUsersComponent userId={id} key={id}/>
                         }}/>
                     </Switch>
                 </div>
-
             </div>
         );
     }
 }
 
-export default withRouter(AllUsersComponents);
+export default withRouter(AllUsersComponent);

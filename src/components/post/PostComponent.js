@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
 import './Post.css'
 
-import {withRouter, Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 
 class PostComponent extends Component {
     render() {
 
-        let {item, match: {url}} = this.props;
+        const {item, match: {url}} = this.props;
 
         return (
-            <div className={'post'}>
-                {item.id} - {item.title}
-                <hr/>
-                {item.body} - <Link to={`${url}/${item.id}`}>details</Link>
+            <div className={'post-render'}>
+                {item.id} - {item.title} - <Link to={`${url}/${item.id}`} className={'link-details'}>details</Link>
             </div>
         );
     }

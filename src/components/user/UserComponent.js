@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
+import './User.css'
 
-import {withRouter, Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
+
 
 class UserComponent extends Component {
     render() {
 
-        let {item, match: {url}} = this.props;
+        const {item, match: {url}} = this.props;
 
         return (
-            <div>
-                {item.id} - {item.name} - {item.email} - {item.username} - <Link to={`${url}/${item.id}`}>details</Link>
+            <div className={'user-render'}>
+                {item.id} - {item.name} - <Link to={`${url}/${item.id}`} className={'link-details'}>details</Link>
             </div>
         );
     }

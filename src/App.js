@@ -1,38 +1,34 @@
 import React, {Component} from 'react';
-import AllUsersComponents from "./components/allUsers/AllUsersComponents";
-import AllPostsComponent from "./components/allPosts/AllPostsComponent";
-import AllCommentsComponent from "./components/allComments/AllCommentsComponent";
 import './App.css'
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import AllUsersComponent from "./components/all-users/AllUsersComponent";
+import AllPostsComponent from "./components/all-posts/AllPostsComponent";
+import AllCommentsComponent from "./components/all-comments/AllCommentsComponent";
 
 
 class App extends Component {
     render() {
         return (
             <Router>
-                <div>
-                    <div>
-                        <Link to={'/users'}>users</Link>
-                    </div>
-                    <div>
-                        <Link to={'/posts'}>posts</Link>
-                    </div>
-                    <div>
-                        <Link to={'/comments'}>comments</Link>
+                <div className={'main-block'}>
+                    <div className={'navigation-route'}>
+                        <div>
+                            <Link to={'/users'} className={'App-link'}>Users</Link>
+                        </div>
+                        <div>
+                            <Link to={'/posts'} className={'App-link'}>Posts</Link>
+                        </div>
+                        <div>
+                            <Link to={'/comments'} className={'App-link'}>Comments</Link>
+                        </div>
                     </div>
 
 
                     <div className={'app-route'}>
                         <Switch>
                             <Route path={'/users'} render={() => {
-                                return <AllUsersComponents/>
+                                return <AllUsersComponent/>
                             }}/>
                             <Route path={'/posts'} render={() => {
                                 return <AllPostsComponent/>
