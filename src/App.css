@@ -1,24 +1,6 @@
-body {
-  background: #20232a;
-}
-.app-route {
-  border: 1px solid #61dafb;
-  background: #282c34;
-  color: white;
-  width: 650px;
-  padding: 10px;
-}
-.App-link {
-  color: #61dafb;
-  padding: 10px;
-}
-.navigation-route {
-  display: flex;
-  float: left;
-  margin: 10px;
-}
-.main-block {
-  display: inline-grid;
+.chosen-user-render {
+  background: lightgrey;
+  width: 600px;
   margin: 20px;
+  text-align: center;
 }
-
