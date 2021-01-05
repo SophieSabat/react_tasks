@@ -5,7 +5,7 @@ import './App.css'
 class App extends Component {
 
     inputMain = React.createRef();
-    state = {inputValue: '', chosenOneUser: []};
+    state = {inputValue: '', chosenOneUser: null};
     userService = new UserService();
 
     onInputFill = () => {
